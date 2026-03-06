@@ -1,0 +1,21 @@
+<header class="flex items-center justify-between px-6 h-16 border-b">
+  <button
+    class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+    (click)="layout.toggleSidebar()"
+  >
+    ☰
+  </button>
+
+  <div class="font-semibold text-lg">Modern Angular</div>
+
+  <div class="flex items-center gap-4">
+    <button
+      class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+      (click)="layout.toggleDarkMode()"
+    >
+      🌙
+    </button>
+
+    <span class="cursor-pointer">👤</span>
+  </div>
+</header>

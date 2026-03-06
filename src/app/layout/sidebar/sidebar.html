@@ -1,0 +1,46 @@
+<aside
+  class="border-r transition-all duration-300 bg-gray-50 dark:bg-gray-800 overflow-hidden"
+  [class.w-64]="layout.sidebarOpen()"
+  [class.w-16]="!layout.sidebarOpen()"
+>
+  <nav class="flex flex-col p-3 gap-2">
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="bg-gray-200 dark:bg-gray-700"
+      class="flex items-center gap-4 px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+      title="Dashboard"
+    >
+      <mat-icon class="shrink-0">dashboard</mat-icon>
+
+      @if (layout.sidebarOpen()) {
+        <span class="whitespace-nowrap overflow-hidden">Dashboard</span>
+      }
+    </a>
+
+    <a
+      routerLink="/users"
+      routerLinkActive="bg-gray-200 dark:bg-gray-700"
+      class="flex items-center gap-4 px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+      title="Users"
+    >
+      <mat-icon class="shrink-0">group</mat-icon>
+
+      @if (layout.sidebarOpen()) {
+        <span class="whitespace-nowrap overflow-hidden">Users</span>
+      }
+    </a>
+
+    <a
+      routerLink="/settings"
+      routerLinkActive="bg-gray-200 dark:bg-gray-700"
+      class="flex items-center gap-4 px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+      title="Settings"
+    >
+      <mat-icon class="shrink-0">settings</mat-icon>
+
+      @if (layout.sidebarOpen()) {
+        <span class="whitespace-nowrap overflow-hidden">Settings</span>
+      }
+    </a>
+  </nav>
+</aside>

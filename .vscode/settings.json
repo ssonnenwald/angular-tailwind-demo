@@ -1,0 +1,6 @@
+{
+  "terminal.integrated.environmentChangesRelaunch": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}
