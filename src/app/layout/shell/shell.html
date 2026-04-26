@@ -1,13 +1,13 @@
-<div class="min-h-screen p-4 md:p-8 bg-gray-100 dark:bg-gray-900">
+<div class="h-screen p-4 md:p-8 bg-gray-100 dark:bg-gray-900">
   <div
-    class="h-full grid grid-rows-[auto_1fr] rounded-xl border shadow-lg bg-white dark:bg-gray-800"
+    class="h-full grid grid-rows-[auto_1fr] rounded-xl border shadow-lg overflow-hidden bg-white dark:bg-gray-800"
   >
     <app-header></app-header>
 
-    <div class="flex h-full overflow-hidden">
+    <div class="flex h-full min-h-0">
       <app-sidebar></app-sidebar>
 
-      <main class="flex-1 overflow-auto p-6">
+      <main class="flex-1 overflow-auto p-6 min-h-0">
         <router-outlet></router-outlet>
       </main>
     </div>

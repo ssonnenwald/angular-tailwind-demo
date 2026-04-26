@@ -9,7 +9,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css',
 })
 export class App implements OnInit {
-  protected readonly title = signal('angular-tailwind-demo');
   private readonly iconRegistry = inject(MatIconRegistry);
 
   ngOnInit(): void {

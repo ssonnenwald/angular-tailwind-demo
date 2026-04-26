@@ -1,1 +1,224 @@
-<p>settings works!</p>
+<div class="space-y-6 max-w-4xl">
+  <!-- Page header -->
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Settings</h1>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+      Manage your account preferences and configuration.
+    </p>
+  </div>
+
+  <!-- Profile section -->
+  <section
+    class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+  >
+    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Profile</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+        Update your personal information.
+      </p>
+    </div>
+
+    <div class="p-6 space-y-5">
+      <!-- Avatar upload -->
+      <div class="flex items-center gap-4">
+        <div
+          class="w-16 h-16 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center text-xl font-semibold text-indigo-600 dark:text-indigo-300"
+        >
+          JD
+        </div>
+        <div class="flex gap-2">
+          <button
+            class="px-3 py-1.5 text-sm font-medium bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-white"
+          >
+            Upload new
+          </button>
+          <button
+            class="px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+
+      <!-- Name fields side-by-side -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+            First name
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="profile.firstName"
+            class="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+            Last name
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="profile.lastName"
+            class="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+          Email address
+        </label>
+        <input
+          type="email"
+          [(ngModel)]="profile.email"
+          class="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+        />
+      </div>
+
+      <!-- Bio textarea -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+          Bio
+        </label>
+        <textarea
+          [(ngModel)]="profile.bio"
+          rows="3"
+          class="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none"
+          placeholder="A short bio about yourself..."
+        ></textarea>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          Brief description for your profile. Max 200 characters.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notifications section with toggles -->
+  <section
+    class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+  >
+    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Notifications</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+        Choose what you want to be notified about.
+      </p>
+    </div>
+
+    <div class="divide-y divide-gray-200 dark:divide-gray-700">
+      @for (notif of notifications(); track notif.key) {
+        <div class="px-6 py-4 flex items-center justify-between gap-4">
+          <div class="flex-1">
+            <div class="font-medium text-gray-900 dark:text-white text-sm">
+              {{ notif.label }}
+            </div>
+            <div class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+              {{ notif.description }}
+            </div>
+          </div>
+          <button
+            (click)="toggleNotification(notif.key)"
+            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors shrink-0 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            [class.bg-indigo-600]="notif.enabled"
+            [class.bg-gray-300]="!notif.enabled"
+            [class.dark:bg-gray-600]="!notif.enabled"
+          >
+            <span
+              class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow"
+              [class.translate-x-6]="notif.enabled"
+              [class.translate-x-1]="!notif.enabled"
+            ></span>
+          </button>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Appearance section with radio cards -->
+  <section
+    class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+  >
+    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Appearance</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+        Customize how the interface looks.
+      </p>
+    </div>
+
+    <div class="p-6">
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3"> Theme </label>
+      <div class="grid grid-cols-3 gap-3">
+        @for (theme of themes; track theme.value) {
+          <button
+            (click)="selectedTheme.set(theme.value)"
+            class="relative p-4 rounded-lg border-2 transition-all"
+            [class.border-indigo-600]="selectedTheme() === theme.value"
+            [class.dark:border-indigo-400]="selectedTheme() === theme.value"
+            [class.bg-indigo-50]="selectedTheme() === theme.value"
+            [class.dark:bg-indigo-900/30]="selectedTheme() === theme.value"
+            [class.border-gray-200]="selectedTheme() !== theme.value"
+            [class.dark:border-gray-600]="selectedTheme() !== theme.value"
+            [class.hover:border-gray-300]="selectedTheme() !== theme.value"
+            [class.dark:hover:border-gray-500]="selectedTheme() !== theme.value"
+          >
+            <mat-icon
+              class="text-gray-700 dark:text-gray-300 mx-auto mb-2"
+              [class.!text-indigo-600]="selectedTheme() === theme.value"
+              [class.dark:!text-indigo-400]="selectedTheme() === theme.value"
+            >
+              {{ theme.icon }}
+            </mat-icon>
+            <div
+              class="text-sm font-medium"
+              [class.text-indigo-700]="selectedTheme() === theme.value"
+              [class.dark:text-indigo-300]="selectedTheme() === theme.value"
+              [class.text-gray-700]="selectedTheme() !== theme.value"
+              [class.dark:text-gray-300]="selectedTheme() !== theme.value"
+            >
+              {{ theme.label }}
+            </div>
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Danger zone -->
+  <section
+    class="bg-white dark:bg-gray-800 rounded-xl border border-red-200 dark:border-red-900/50 overflow-hidden"
+  >
+    <div class="px-6 py-4 border-b border-red-200 dark:border-red-900/50">
+      <h2 class="text-lg font-semibold text-red-700 dark:text-red-400">Danger zone</h2>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+        Irreversible and destructive actions.
+      </p>
+    </div>
+    <div class="p-6 flex items-center justify-between gap-4">
+      <div>
+        <div class="font-medium text-gray-900 dark:text-white text-sm">Delete account</div>
+        <div class="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+          Permanently delete your account and all of its data.
+        </div>
+      </div>
+      <button
+        class="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors shadow-sm shrink-0"
+      >
+        Delete account
+      </button>
+    </div>
+  </section>
+
+  <!-- Save bar -->
+  <div class="flex justify-end gap-3 py-4">
+    <button
+      class="px-4 py-2 text-sm font-medium bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-white"
+    >
+      Cancel
+    </button>
+    <button
+      class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors shadow-sm"
+    >
+      Save changes
+    </button>
+  </div>
+</div>

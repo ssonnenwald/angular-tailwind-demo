@@ -1,1 +1,141 @@
-<p>dashboard works!</p>
+<div class="space-y-6">
+  <!-- Page header -->
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+        Welcome back. Here's what's happening today.
+      </p>
+    </div>
+    <button
+      class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors shadow-sm font-medium text-sm"
+    >
+      <mat-icon class="w-4! h-4! text-base!">add</mat-icon>
+      New report
+    </button>
+  </div>
+
+  <!-- Stats grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    @for (stat of stats; track stat.label) {
+      <div
+        class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 hover:shadow-md transition-shadow"
+      >
+        <div class="flex items-start justify-between">
+          <div>
+            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+              {{ stat.label }}
+            </p>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white mt-2">
+              {{ stat.value }}
+            </p>
+          </div>
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center" [class]="stat.iconBg">
+            <mat-icon [class]="stat.iconColor">{{ stat.icon }}</mat-icon>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 mt-4 text-sm">
+          <mat-icon
+            class="w-4! h-4! text-base!"
+            [class.text-green-600]="stat.trending === 'up'"
+            [class.text-red-600]="stat.trending === 'down'"
+          >
+            {{ stat.trending === 'up' ? 'trending_up' : 'trending_down' }}
+          </mat-icon>
+          <span
+            class="font-medium"
+            [class.text-green-600]="stat.trending === 'up'"
+            [class.text-red-600]="stat.trending === 'down'"
+          >
+            {{ stat.change }}
+          </span>
+          <span class="text-gray-500 dark:text-gray-400">vs last month</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Two-column area: chart + activity -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <!-- Chart placeholder (spans 2 cols) -->
+    <div
+      class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6"
+    >
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Revenue</h2>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Last 7 days</p>
+        </div>
+        <div class="flex gap-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+          <button
+            class="px-3 py-1 text-sm rounded-md bg-white dark:bg-gray-600 shadow-sm font-medium text-gray-900 dark:text-white"
+          >
+            Week
+          </button>
+          <button
+            class="px-3 py-1 text-sm rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+          >
+            Month
+          </button>
+          <button
+            class="px-3 py-1 text-sm rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+          >
+            Year
+          </button>
+        </div>
+      </div>
+      <!-- Faux bar chart with Tailwind -->
+      <div class="flex items-end justify-between gap-2 h-48">
+        @for (bar of chartBars; track $index) {
+          <div class="flex-1 flex flex-col items-center gap-2 group">
+            <div
+              class="w-full bg-indigo-200 dark:bg-indigo-900 rounded-t-md hover:bg-indigo-400 dark:hover:bg-indigo-600 transition-colors relative"
+              [style.height.%]="bar.height"
+            >
+              <div
+                class="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap"
+              >
+                \${{ bar.value }}
+              </div>
+            </div>
+            <span class="text-xs text-gray-500 dark:text-gray-400">{{ bar.label }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Activity feed -->
+    <div
+      class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6"
+    >
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent activity</h2>
+      <div class="space-y-4">
+        @for (activity of activities; track $index) {
+          <div class="flex items-start gap-3">
+            <div
+              class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium shrink-0"
+              [class]="activity.color"
+            >
+              {{ activity.initials }}
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm text-gray-900 dark:text-gray-100">
+                <span class="font-medium">{{ activity.user }}</span>
+                {{ activity.action }}
+                <span class="font-medium">{{ activity.target }}</span>
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                {{ activity.time }}
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+      <button
+        class="w-full mt-4 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg transition-colors"
+      >
+        View all activity
+      </button>
+    </div>
+  </div>
+</div>

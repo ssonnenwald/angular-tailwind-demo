@@ -19,6 +19,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/settings/settings').then((m) => m.Settings),
       },
       {
+        path: 'styleguide',
+        loadComponent: () => import('./pages/styleguide/styleguide').then((m) => m.Styleguide),
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',

@@ -1,0 +1,252 @@
+<div class="space-y-8 max-w-5xl">
+  <!-- Page header -->
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Style guide</h1>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+      Design tokens and component patterns used in this app.
+    </p>
+  </div>
+
+  <!-- Typography -->
+  <section
+    class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6"
+  >
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Typography</h2>
+    <div class="space-y-4">
+      <div class="flex items-baseline gap-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+        <span class="text-xs text-gray-500 dark:text-gray-400 w-32 shrink-0 font-mono">
+          text-3xl / bold
+        </span>
+        <span class="text-3xl font-bold text-gray-900 dark:text-white">Heading one</span>
+      </div>
+      <div class="flex items-baseline gap-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+        <span class="text-xs text-gray-500 dark:text-gray-400 w-32 shrink-0 font-mono">
+          text-2xl / bold
+        </span>
+        <span class="text-2xl font-bold text-gray-900 dark:text-white">Heading two</span>
+      </div>
+      <div class="flex items-baseline gap-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+        <span class="text-xs text-gray-500 dark:text-gray-400 w-32 shrink-0 font-mono">
+          text-lg / semibold
+        </span>
+        <span class="text-lg font-semibold text-gray-900 dark:text-white">Heading three</span>
+      </div>
+      <div class="flex items-baseline gap-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+        <span class="text-xs text-gray-500 dark:text-gray-400 w-32 shrink-0 font-mono">
+          text-base
+        </span>
+        <span class="text-base text-gray-900 dark:text-white">Body text. The quick brown fox.</span>
+      </div>
+      <div class="flex items-baseline gap-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+        <span class="text-xs text-gray-500 dark:text-gray-400 w-32 shrink-0 font-mono">
+          text-sm
+        </span>
+        <span class="text-sm text-gray-700 dark:text-gray-300">Small text for secondary info.</span>
+      </div>
+      <div class="flex items-baseline gap-4">
+        <span class="text-xs text-gray-500 dark:text-gray-400 w-32 shrink-0 font-mono">
+          text-xs
+        </span>
+        <span class="text-xs text-gray-500 dark:text-gray-400">Caption, hint, or label text.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Color palette -->
+  <section
+    class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6"
+  >
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Color palette</h2>
+    <div class="space-y-5">
+      @for (ramp of colorRamps; track ramp.name) {
+        <div>
+          <div class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            {{ ramp.name }}
+          </div>
+          <div class="grid grid-cols-5 sm:grid-cols-10 gap-1">
+            @for (shade of ramp.shades; track shade.weight) {
+              <div class="text-center">
+                <div
+                  class="h-12 rounded-md mb-1 border border-gray-200 dark:border-gray-700"
+                  [class]="shade.class"
+                ></div>
+                <div class="text-[10px] font-mono text-gray-500 dark:text-gray-400">
+                  {{ shade.weight }}
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Buttons -->
+  <section
+    class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6"
+  >
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Buttons</h2>
+
+    <div class="space-y-6">
+      <div>
+        <div class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Variants</div>
+        <div class="flex flex-wrap gap-3">
+          <button
+            class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors shadow-sm"
+          >
+            Primary
+          </button>
+          <button
+            class="px-4 py-2 text-sm font-medium bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-white"
+          >
+            Secondary
+          </button>
+          <button
+            class="px-4 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg transition-colors"
+          >
+            Ghost
+          </button>
+          <button
+            class="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors shadow-sm"
+          >
+            Destructive
+          </button>
+          <button
+            class="px-4 py-2 text-sm font-medium text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 rounded-lg cursor-not-allowed"
+            disabled
+          >
+            Disabled
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Sizes</div>
+        <div class="flex flex-wrap items-center gap-3">
+          <button
+            class="px-2.5 py-1 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors"
+          >
+            Extra small
+          </button>
+          <button
+            class="px-3 py-1.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors"
+          >
+            Small
+          </button>
+          <button
+            class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
+          >
+            Medium
+          </button>
+          <button
+            class="px-5 py-2.5 text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors"
+          >
+            Large
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">With icons</div>
+        <div class="flex flex-wrap gap-3">
+          <button
+            class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors shadow-sm"
+          >
+            <mat-icon class="w-4! h-4! text-base!">add</mat-icon>
+            Add item
+          </button>
+          <button
+            class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors text-gray-900 dark:text-white"
+          >
+            <mat-icon class="w-4! h-4! text-base!">file_download</mat-icon>
+            Download
+          </button>
+          <button
+            class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
+            title="Settings"
+          >
+            <mat-icon>settings</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Badges -->
+  <section
+    class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6"
+  >
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Badges</h2>
+    <div class="flex flex-wrap gap-2">
+      <span
+        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300"
+      >
+        Default
+      </span>
+      <span
+        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300"
+      >
+        Info
+      </span>
+      <span
+        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300"
+      >
+        Success
+      </span>
+      <span
+        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300"
+      >
+        Warning
+      </span>
+      <span
+        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300"
+      >
+        Danger
+      </span>
+      <span
+        class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300"
+      >
+        <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+        With dot
+      </span>
+    </div>
+  </section>
+
+  <!-- Spacing scale -->
+  <section
+    class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6"
+  >
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Spacing scale</h2>
+    <div class="space-y-2">
+      @for (s of spacingScale; track s.name) {
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-mono text-gray-500 dark:text-gray-400 w-12 shrink-0">
+            {{ s.name }}
+          </span>
+          <span class="text-xs text-gray-500 dark:text-gray-400 w-14 shrink-0">
+            {{ s.px }}
+          </span>
+          <div
+            class="bg-indigo-200 dark:bg-indigo-900 h-3 rounded"
+            [style.width.px]="s.value"
+          ></div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Shadows -->
+  <section
+    class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6"
+  >
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Shadows</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+      @for (shadow of shadows; track shadow.name) {
+        <div class="text-center">
+          <div class="h-20 bg-white dark:bg-gray-700 rounded-lg mb-2" [class]="shadow.class"></div>
+          <div class="text-xs font-mono text-gray-500 dark:text-gray-400">{{ shadow.name }}</div>
+        </div>
+      }
+    </div>
+  </section>
+</div>

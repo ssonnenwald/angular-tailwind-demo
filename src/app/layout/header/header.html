@@ -1,21 +1,31 @@
-<header class="flex items-center justify-between px-6 h-16 border-b">
-  <button
-    class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-    (click)="layout.toggleSidebar()"
-  >
-    ☰
-  </button>
-
-  <div class="font-semibold text-lg">Modern Angular</div>
-
-  <div class="flex items-center gap-4">
+<header
+  class="flex items-center justify-between h-16 border-b border-gray-200 dark:border-gray-700 pr-6"
+>
+  <div class="w-16 flex items-center justify-center shrink-0">
     <button
-      class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
-      (click)="layout.toggleDarkMode()"
+      (click)="layout.toggleSidebar()"
+      class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
+      title="Toggle sidebar"
     >
-      🌙
+      <mat-icon>menu</mat-icon>
     </button>
+  </div>
 
-    <span class="cursor-pointer">👤</span>
+  <div class="font-semibold text-lg dark:text-white">Modern Angular</div>
+
+  <div class="flex items-center gap-2">
+    <button
+      (click)="layout.toggleDarkMode()"
+      class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-300"
+      title="Toggle dark mode"
+    >
+      <mat-icon>{{ layout.darkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+    <button
+      class="w-9 h-9 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center hover:ring-2 hover:ring-indigo-400 transition-all"
+      title="Account"
+    >
+      <mat-icon class="text-indigo-600 dark:text-indigo-300">person</mat-icon>
+    </button>
   </div>
 </header>
